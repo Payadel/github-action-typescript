@@ -14,7 +14,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Documents
 
 * add Payadel readme template ([407982f](https://github.com/Payadel/github-action-typescript/commit/407982fed08150cee0f34ba44fa173f98358c100))
-* update issue templates ([05feafa](https://github.com/Payadel/github-action-typescript/commit/05feafa05d875caa71bd50068daa4c21a2ec6b47))
 * update Payadel readme to v 0.2.3 ([178f075](https://github.com/Payadel/github-action-typescript/commit/178f075bc14d501bd4cc08468791feacc29ce5f4))
 
 
