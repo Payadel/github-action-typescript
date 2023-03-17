@@ -1,0 +1,18 @@
+name: 'Say Hello'
+description: 'Say Hello'
+author: 'Author'
+
+# Here we define the inputs, which can be set
+# from the workflow file and are consumed in our code
+inputs:
+  who-to-greet:
+    description: 'Who should I say hello to?'
+    required: true
+  milliseconds:
+    required: true
+    description: 'input description here'
+    default: 'default value if applicable'
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
