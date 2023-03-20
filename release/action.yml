@@ -12,6 +12,9 @@ inputs:
     required: true
     description: 'input description here'
     default: 'default value if applicable'
+outputs:
+  time:
+    description: 'Date time after delay'
 
 runs:
   using: 'node16'

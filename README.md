@@ -81,7 +81,7 @@
 > Please provide your screenshots here.
 
 |                               Home Page                               |                               Login Page                               |
-| :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+|:---------------------------------------------------------------------:|:----------------------------------------------------------------------:|
 | <img src="docs/images/screenshot.png" title="Home Page" width="100%"> | <img src="docs/images/screenshot.png" title="Login Page" width="100%"> |
 
 </details>
@@ -101,13 +101,17 @@
 
 > **[?]**
 > What are the project requirements/dependencies?
-> Describe any dependencies that must be installed for this software to work. This includes programming languages, databases or other storage mechanisms, build tools, frameworks, and so forth. If specific versions of other software are required, or known not to work, call that out.
+> Describe any dependencies that must be installed for this software to work. This includes programming languages,
+> databases or other storage mechanisms, build tools, frameworks, and so forth. If specific versions of other software
+> are
+> required, or known not to work, call that out.
 
 ### Installation
 
 > **[?]**
 > Describe how to install and get started with the project.
-> Detailed instructions on how to install, configure, and get the project running. This should be frequently tested to ensure reliability. Alternatively, link to a separate [INSTALL](INSTALL.md) document.
+> Detailed instructions on how to install, configure, and get the project running. This should be frequently tested to
+> ensure reliability. Alternatively, link to a separate [INSTALL](INSTALL.md) document.
 
 ## Usage
 
@@ -219,7 +223,8 @@ See [LICENSE](LICENSE) for more information.
 
 > **[?]**
 > If your work was funded by any organization or institution, acknowledge their support here.
-> In addition, if your work relies on other software libraries, or was inspired by looking at other work, it is appropriate to acknowledge this intellectual debt too.
+> In addition, if your work relies on other software libraries, or was inspired by looking at other work, it is
+> appropriate to acknowledge this intellectual debt too.
 
 ## Related
 
