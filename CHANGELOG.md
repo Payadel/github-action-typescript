@@ -1,7 +1,29 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.0.2](https://github.com/Payadel/github-action-typescript/compare/v0.0.1...v0.0.2) (2023-03-20)
+
+
+### Features
+
+* **action:** add output sample to action.yml ([ad397ea](https://github.com/Payadel/github-action-typescript/commit/ad397eac6592471fb45b6a49b4929f094db8e2cc))
+* **pre-commit:** add custom hooks for pre-commit ([09fc57f](https://github.com/Payadel/github-action-typescript/commit/09fc57f9c5475858db90e99733923efeb72a8ce0))
+
+
+### Development: CI/CD, Build, etc
+
+* **changelog:** add payadel/changelog-sv to changelog.yaml ([12dccc1](https://github.com/Payadel/github-action-typescript/commit/12dccc1383ef0b75f500bd89825d05ffb955d978))
+
+
+### Fixes
+
+* **precommit:** use Payadel `pre-commit-hooks` in .pre-commit-config.yaml ([9d64457](https://github.com/Payadel/github-action-typescript/commit/9d644575d89c714d22b4caa21bb00606080433cb))
+
+
+### Refactors
+
+* minor updates ([c85e717](https://github.com/Payadel/github-action-typescript/commit/c85e717f8161256f0376db081e3423fbcfa5c50c))
 
 ### 0.0.1 (2023-03-17)
 
