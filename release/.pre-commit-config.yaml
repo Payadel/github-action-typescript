@@ -6,9 +6,9 @@ repos:
     hooks:
       - id: run-scripts
         name: Run All Before Push
-        args: ["-f", ".git-hooks/run-all-before-push.sh"]
+        args: [ "-f", ".git-hooks/run-all-before-push.sh" ]
         stages: [ push ]
       - id: run-scripts
         name: Before Commit
-        args: ["-f", ".git-hooks/.git-hooks/before-commit.sh"]
+        args: [ "-f", ".git-hooks/.git-hooks/before-commit.sh" ]
         stages: [ commit-msg ]
