@@ -1,26 +1,32 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## [0.1.0](https://github.com/Payadel/github-action-typescript/compare/v0.0.2...v0.1.0) (2023-03-21)
-
 
 ### ⚠ BREAKING CHANGES
 
 * rename test.yml to build-test.yml
+* add `--passWithNoTests` to test script
 
 ### Features
 
-* add assert.sh utility for test action in build-test.yml ([5fa9606](https://github.com/Payadel/github-action-typescript/commit/5fa96065304c4e2b5b55a891526d382312541957))
-* add sample function for execute bash commands ([337a987](https://github.com/Payadel/github-action-typescript/commit/337a9877bb18d94c33da74e4ca272a60ad5bd8da))
-* update run-all-before-push.sh ([df0962b](https://github.com/Payadel/github-action-typescript/commit/df0962bfeeffae35676fecfc73182db102ef8b2e))
-
+* add `assert.sh` utility for test action in
+  build-test.yml ([5fa9606](https://github.com/Payadel/github-action-typescript/commit/5fa96065304c4e2b5b55a891526d382312541957))
+* add sample function for execute bash
+  commands ([337a987](https://github.com/Payadel/github-action-typescript/commit/337a9877bb18d94c33da74e4ca272a60ad5bd8da))
+* update
+  run-all-before-push.sh ([df0962b](https://github.com/Payadel/github-action-typescript/commit/df0962bfeeffae35676fecfc73182db102ef8b2e))
 
 ### Fixes
 
-* **eslintrc:** update rules ([0e39902](https://github.com/Payadel/github-action-typescript/commit/0e39902e3665d5fbb221229f08bcbbe3b5dcd3b7))
-* **package:** add --passWithNoTests to test script ([3ad6535](https://github.com/Payadel/github-action-typescript/commit/3ad6535ec067c8e9dc242d957df7868e8b3fd1e1))
-* rename test.yml to build-test.yml ([e50a2be](https://github.com/Payadel/github-action-typescript/commit/e50a2be8240db68f2a8eee863a8d7e28912fedbd))
+* **eslintrc:** update
+  rules ([0e39902](https://github.com/Payadel/github-action-typescript/commit/0e39902e3665d5fbb221229f08bcbbe3b5dcd3b7))
+* **package:** add --passWithNoTests to test
+  script ([3ad6535](https://github.com/Payadel/github-action-typescript/commit/3ad6535ec067c8e9dc242d957df7868e8b3fd1e1))
+* rename test.yml to
+  build-test.yml ([e50a2be](https://github.com/Payadel/github-action-typescript/commit/e50a2be8240db68f2a8eee863a8d7e28912fedbd))
 
 ### [0.0.2](https://github.com/Payadel/github-action-typescript/compare/v0.0.1...v0.0.2) (2023-03-20)
 
