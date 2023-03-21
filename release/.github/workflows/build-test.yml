@@ -32,5 +32,9 @@ jobs:
           who-to-greet: World
           milliseconds: 1000
 
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Get and Test outputs
+        run: |
+          cd .github/workflows
+          if [ ! -f assert.sh ]; then echo "Can not find assert.sh"; exit 1; fi
+          chmod +x assert.sh
+          ./assert.sh "${{ steps.hello.outputs.hello-message }}" "Hello World!" "hello-message"

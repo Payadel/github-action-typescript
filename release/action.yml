@@ -13,8 +13,8 @@ inputs:
     description: 'input description here'
     default: 'default value if applicable'
 outputs:
-  time:
-    description: 'Date time after delay'
+  hello-message:
+    description: 'The hello message'
 
 runs:
   using: 'node16'
