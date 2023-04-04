@@ -1,0 +1,22 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run All
+        run: |
+          cd release
+          npm install
+          export NODE_OPTIONS=--openssl-legacy-provider
+          npm run all
