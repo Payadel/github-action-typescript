@@ -33,8 +33,8 @@ jobs:
           echo "pr_lock_inactive_days: ${{ inputs.pr_lock_inactive_days }}"
           echo "pr_lock_reason: ${{ inputs.pr_lock_reason }}"
           
-          [[ ${{ inputs.issue_lock_inactive_days }} -lt 1 ]] && echo "issue_lock_inactive_days must more than 0"; exit 1
-          [[ ${{ inputs.pr_lock_inactive_days }} -lt 1 ]] && echo "pr_lock_inactive_days must more than 0"; exit 1
+          [[ ${{ inputs.issue_lock_inactive_days }} -lt 1 ]] && (echo "issue_lock_inactive_days must more than 0"; exit 1)
+          [[ ${{ inputs.pr_lock_inactive_days }} -lt 1 ]] && (echo "pr_lock_inactive_days must more than 0"; exit 1)
 
       - uses: dessant/lock-threads@v4.0.0
         with:
