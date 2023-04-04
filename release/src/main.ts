@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
-import * as exec from "@actions/exec";
 import { wait } from "./wait";
+// import * as exec from "@actions/exec";
 
 async function run(): Promise<void> {
   try {
@@ -25,8 +25,8 @@ async function run(): Promise<void> {
   }
 }
 
-async function execBashCommand(command: string) {
-  return exec.getExecOutput(`/bin/bash -c "${command}"`);
-}
+// async function execBashCommand(command: string): Promise<exec.ExecOutput> {
+//   return exec.getExecOutput(`/bin/bash -c "${command}"`);
+// }
 
 run();
