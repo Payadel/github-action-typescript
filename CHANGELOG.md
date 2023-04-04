@@ -1,7 +1,16 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.1](https://github.com/Payadel/github-action-typescript/compare/v0.1.0...v0.1.1) (2023-04-04)
+
+
+### Development: CI/CD, Build, etc
+
+* add build-test.yml ([4be8e65](https://github.com/Payadel/github-action-typescript/commit/4be8e652f79986d801e56f542302b6da0afee362))
+* **package:** update packages ([8fbab60](https://github.com/Payadel/github-action-typescript/commit/8fbab60713dbb5078c4d19812a78e0671b75c38a))
+* **release:** update release.yaml ([d19645f](https://github.com/Payadel/github-action-typescript/commit/d19645f12fc2967c18b7e3632ba50a94df7fbb7f))
+* use Payadel actions in release.yaml ([f8af640](https://github.com/Payadel/github-action-typescript/commit/f8af6401ce4b7b6d089b164977c3ec48515de45f))
 
 ## [0.1.0](https://github.com/Payadel/github-action-typescript/compare/v0.0.2...v0.1.0) (2023-03-21)
 
