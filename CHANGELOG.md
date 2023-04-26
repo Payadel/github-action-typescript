@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/Payadel/github-action-typescript/compare/v0.2.0...v0.2.1) (2023-04-26)
+
+
+### Development: CI/CD, Build, etc
+
+* remove excess inputs from release.yaml to prevent mistakes ([b241576](https://github.com/Payadel/github-action-typescript/commit/b24157658178747801b5e48065f05a16cf4555ad))
+
 ## [0.2.0](https://github.com/Payadel/github-action-typescript/compare/v0.1.1...v0.2.0) (2023-04-26)
 
 
