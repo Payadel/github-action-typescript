@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import {getInputs} from "./inputs";
+import { getInputs } from "./inputs";
 // import * as github from "@actions/github";
 // import * as exec from "@actions/exec";
 

@@ -6,20 +6,24 @@ export interface IInputs {
 
 export const getInputs = (): Promise<IInputs> =>
     new Promise<IInputs>(resolve => {
-        const nameToGreet = getInputOrDefault("who-to-great", null, true, true);
-        if(!nameToGreet)
-            throw new Error("The name-to-great param is required.")
+        const nameToGreet = getInputOrDefault("who-to-great", "", true, true);
+        if (!nameToGreet)
+            throw new Error("The name-to-great param is required.");
 
         return resolve({
-            nameToGreet
+            nameToGreet,
         });
     });
 
-function getInputOrDefault(name: string, default_value: any = null,
-                           trimWhitespace: boolean = false, required: boolean = false): string {
+function getInputOrDefault(
+    name: string,
+    default_value = "",
+    trimWhitespace = false,
+    required = false
+): string {
     const input = core.getInput(name, {
-        trimWhitespace: trimWhitespace,
-        required: required
+        trimWhitespace,
+        required,
     });
     if (!input || input === "") return default_value;
     return input;
