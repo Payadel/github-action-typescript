@@ -3,12 +3,6 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      release_file_name:
-        required: true
-        default: 'release'
-      release_directory:
-        required: true
-        default: 'release'
       version:
         required: false
         default: ''
@@ -41,8 +35,6 @@ jobs:
 
       - name: Print inputs
         run: |
-          echo "release_file_name: ${{ inputs.release_file_name }}"
-          echo "release_directory: ${{ inputs.release_directory }}"
           echo "skip_changelog: ${{ inputs.skip_changelog }}"
           echo "version: ${{ inputs.version }}"
           echo "create_pr_for_branch: ${{ inputs.create_pr_for_branch }}"
@@ -55,8 +47,8 @@ jobs:
           version: ${{ inputs.version }}
           skip-changelog: ${{ inputs.skip_changelog }}
           skip-release-file: false
-          release-directory: ${{ inputs.release_directory }}
-          release-file-name: ${{ inputs.release_file_name }}
+          release-directory: 'release'
+          release-file-name: 'release'
           create-pr-for-branch: ${{ inputs.create_pr_for_branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
