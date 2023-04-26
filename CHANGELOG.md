@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### ⚠ BREAKING CHANGES
 
 * update .prettierrc.json
+* update src template
 
 ### Features
 
