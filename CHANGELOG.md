@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file. See [standa
 ### [0.2.1](https://github.com/Payadel/github-action-typescript/compare/v0.2.0...v0.2.1) (2023-04-26)
 
 
+### Important Fix
+
+* fix release file
+
 ### Development: CI/CD, Build, etc
 
 * remove excess inputs from release.yaml to prevent mistakes ([b241576](https://github.com/Payadel/github-action-typescript/commit/b24157658178747801b5e48065f05a16cf4555ad))
