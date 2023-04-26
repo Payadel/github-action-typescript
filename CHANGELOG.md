@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Payadel/github-action-typescript/compare/v0.1.1...v0.2.0) (2023-04-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* update .prettierrc.json
+* update src template
+
+### Features
+
+* add `npm install` to `all` script in package.json ([dd121b6](https://github.com/Payadel/github-action-typescript/commit/dd121b680333dfaf03020c538b8b4e89e4c81d65))
+* add tests for src template ([59152bd](https://github.com/Payadel/github-action-typescript/commit/59152bd024515188f2c30b5ba726a28c12520077))
+* check jest before push ([c40d337](https://github.com/Payadel/github-action-typescript/commit/c40d337e604c714a42ea34ee3aaf9e88bb34d240))
+* update src template ([c7d571d](https://github.com/Payadel/github-action-typescript/commit/c7d571d301a5de4a31696e5ed8d262a61ac656cb))
+
+
+### Fixes
+
+* fix .pre-commit-config.yaml ([ccf7a31](https://github.com/Payadel/github-action-typescript/commit/ccf7a315907b8c578146d906e56210e48345e49f))
+* fix git hook scripts ([ec040e3](https://github.com/Payadel/github-action-typescript/commit/ec040e3765764842f3b989f1c3f050bf9116b0d6))
+* fix lint errors and format ([abdf242](https://github.com/Payadel/github-action-typescript/commit/abdf242d147741049eab5727671e6914c21775a5))
+* fix package.json bug ([0fdda18](https://github.com/Payadel/github-action-typescript/commit/0fdda18b144218cce353a23cc2e5a577dab68704))
+* update .prettierrc.json ([95c1ae2](https://github.com/Payadel/github-action-typescript/commit/95c1ae2baa8ffb77c3af4e802831ec55d185ffcc))
+* update Payadel/pre-commit-hooks version ([f664bdd](https://github.com/Payadel/github-action-typescript/commit/f664bdddfc936ef7f8783f6726e7f062b92fab6a))
+* use `Payadel/assert` for asserts ([3e8c26d](https://github.com/Payadel/github-action-typescript/commit/3e8c26da54b0060e29f6d853d071b16bc6b67cba))
+
+
+### Development: CI/CD, Build, etc
+
+* add Makefile ([3135507](https://github.com/Payadel/github-action-typescript/commit/313550777461193c8684899ce9e09e8d49b6e640))
+* **deps:** bump peter-evans/create-pull-request from 4 to 5 ([03811f0](https://github.com/Payadel/github-action-typescript/commit/03811f020cca8f7059b23a7dc485c932e3b72e50))
+* **lock:** update `dessant/lock-threads` ([7bcec68](https://github.com/Payadel/github-action-typescript/commit/7bcec68a794a7f3bd06649d058a54c4f17ec5cf0))
+* minor updates ([77d89af](https://github.com/Payadel/github-action-typescript/commit/77d89af47a3449998dfb6b899744a963fefcb401))
+
 ### [0.1.1](https://github.com/Payadel/github-action-typescript/compare/v0.1.0...v0.1.1) (2023-04-04)
 
 

@@ -1,6 +1,7 @@
 name: 'build-test'
 on: # rebuild any PRs and main branch changes
   pull_request:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -32,9 +33,14 @@ jobs:
           who-to-greet: World
           milliseconds: 1000
 
-      - name: Get and Test outputs
-        run: |
-          cd .github/workflows
-          if [ ! -f assert.sh ]; then echo "Can not find assert.sh"; exit 1; fi
-          chmod +x assert.sh
-          ./assert.sh "${{ steps.hello.outputs.hello-message }}" "Hello World!" "hello-message"
+      # For more information and sample asserts, please see https://github.com/Payadel/assert/
+      - name: Test outputs
+        uses: Payadel/assert@v1.0.0
+        with:
+          fail-fast: false
+          verbose: true
+          inputs: |
+            - name: test hello-message
+              type: Equals
+              expected: 'Hello World!'
+              actual: ${{ steps.hello.outputs.hello-message }}
