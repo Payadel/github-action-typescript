@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/Payadel/github-action-typescript/compare/v0.2.4...v0.2.5) (2023-04-27)
+
+
+### Features
+
+* add outputs.ts ([547b281](https://github.com/Payadel/github-action-typescript/commit/547b281bc58ffa426920a47772c03434a5249e62))
+
 ### [0.2.4](https://github.com/Payadel/github-action-typescript/compare/v0.2.3...v0.2.4) (2023-04-27)
 
 
