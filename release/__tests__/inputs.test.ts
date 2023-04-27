@@ -1,22 +1,17 @@
 import * as core from "@actions/core";
-import { getInputs, IInputs } from "../src/inputs";
+import {getInputs, IInputs} from "../src/inputs";
 
 jest.mock("@actions/core");
 
 export function mockGetInput(
     name: string,
-    whoToGreat: string,
+    inputs: { key: string; value: string }[],
     options?: core.InputOptions | undefined
 ) {
-    let result: string;
-    switch (name.toLowerCase()) {
-        case "who-to-great":
-            result = whoToGreat;
-            break;
-        default:
-            result = "";
-            break;
-    }
+    name = name.toLowerCase();
+    const target = inputs.find(input => input.key.toLowerCase() === name);
+    let result = target ? target.value : '';
+
     if (options && options.required && !result)
         throw new Error(`Input required and not supplied: ${name}`);
     if (options && options.trimWhitespace) result = result.trim();
@@ -28,7 +23,7 @@ describe("getInputs", () => {
         const inputNameToGreet = "Payadel";
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, inputNameToGreet, options)
+                mockGetInput(name, [{key: 'who-to-great', value: inputNameToGreet}], options)
         );
 
         const inputs: IInputs = await getInputs();
@@ -40,7 +35,7 @@ describe("getInputs", () => {
     it("give invalid input, should reject promise", async () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, "", options)
+                mockGetInput(name, [{key: 'who-to-great', value: ''}], options)
         );
         await expect(getInputs()).rejects.toThrow(
             "Input required and not supplied: who-to-great"
@@ -48,7 +43,7 @@ describe("getInputs", () => {
 
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, "   ", options)
+                mockGetInput(name, [{key: 'who-to-great', value: '   '}], options)
         );
         await expect(getInputs()).rejects.toThrow(
             "The name-to-great param is required."
@@ -59,7 +54,7 @@ describe("getInputs", () => {
         const inputNameToGreet = "Payadel";
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, `    ${inputNameToGreet}    `, options)
+                mockGetInput(name, [{key: 'who-to-great', value: `    ${inputNameToGreet}    `}], options)
         );
 
         const inputs: IInputs = await getInputs();

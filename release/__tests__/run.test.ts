@@ -15,7 +15,7 @@ describe("run", () => {
         const setFailedMock = jest.spyOn(core, "setFailed");
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, expectedName, options)
+                mockGetInput(name, [{key: 'who-to-great', value: expectedName}], options)
         );
 
         // Act
@@ -42,7 +42,7 @@ describe("run", () => {
         const setFailedMock = jest.spyOn(core, "setFailed");
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, "", options)
+                mockGetInput(name, [{key: 'who-to-great', value: ''}], options)
         );
 
         // Act

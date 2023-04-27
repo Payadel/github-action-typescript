@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/Payadel/github-action-typescript/compare/v0.2.3...v0.2.4) (2023-04-27)
+
+
+### Fixes
+
+* fix run.test.ts ([1a1628c](https://github.com/Payadel/github-action-typescript/commit/1a1628c7674afadb1a5bc4566ae8ed0ea2e05b89))
+
+### [0.2.3](https://github.com/Payadel/github-action-typescript/compare/v0.2.2...v0.2.3) (2023-04-27)
+
+
+### Fixes
+
+* update inputs.test.ts ([3cc583d](https://github.com/Payadel/github-action-typescript/commit/3cc583df53a92ba72142bca7bab94ce70569417a))
+
 ### [0.2.1](https://github.com/Payadel/github-action-typescript/compare/v0.2.0...v0.2.1) (2023-04-26)
 
 
