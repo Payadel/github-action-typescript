@@ -1,11 +1,17 @@
 name: 'build-test'
-on: # rebuild any PRs and main branch changes
-  pull_request:
-  workflow_dispatch:
+on:
   push:
     branches:
+      - dev
+    paths-ignore:
+      - '**/*.md'  # ignore all files with the .md extension in any subdirectory
+  pull_request:
+    branches:
       - main
-      - 'releases/*'
+      - dev
+    paths-ignore:
+      - '**/*.md'
+  workflow_dispatch:
 
 jobs:
   build: # make sure build/ci work properly
