@@ -27,7 +27,3 @@ const run = (): Promise<void> =>
         });
 
 export default run;
-
-// async function execBashCommand(command: string): Promise<exec.ExecOutput> {
-//   return exec.getExecOutput(`/bin/bash -c "${command}"`);
-// }

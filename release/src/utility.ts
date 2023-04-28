@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import * as exec from "@actions/exec";
 
 export function getInputOrDefault(
     name: string,
@@ -17,11 +18,31 @@ export function getInputOrDefault(
 export function getBooleanInputOrDefault(
     name: string,
     defaultValue: boolean,
-    required: boolean = false,
+    required = false,
 ): boolean {
     const input = getInputOrDefault(name, "", true, required).toLowerCase();
     if (input === "") return defaultValue;
     if (input === "true") return true;
     if (input === "false") return false;
     throw new TypeError(`The value of ${name} is not valid. It must be either true or false but got ${input}`);
+}
+
+export function execBashCommand(
+    command: string,
+    errorMessage: string | null = null
+): Promise<exec.ExecOutput> {
+    command = command.replace(/"/g, "'");
+    return execCommand(`/bin/bash -c "${command}"`, errorMessage);
+}
+
+export function execCommand(
+    command: string,
+    errorMessage: string | null = null
+): Promise<exec.ExecOutput> {
+    return exec.getExecOutput(command).catch(error => {
+        const title = errorMessage || `Execute '${command}' failed.`;
+        const message =
+            error instanceof Error ? error.message : error.toString();
+        throw new Error(`${title}\n${message}`);
+    });
 }
