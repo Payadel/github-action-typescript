@@ -7,7 +7,7 @@ export function mockGetInput(
     name: string,
     inputs: { key: string; value: string }[],
     options?: core.InputOptions | undefined
-) {
+): string {
     name = name.toLowerCase();
     const target = inputs.find(input => input.key.toLowerCase() === name);
     let result = target ? target.value : '';

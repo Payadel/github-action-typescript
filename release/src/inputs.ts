@@ -1,4 +1,4 @@
-import * as core from "@actions/core";
+import {getInputOrDefault} from "./utility";
 
 export interface IInputs {
     nameToGreet: string;
@@ -14,17 +14,3 @@ export const getInputs = (): Promise<IInputs> =>
             nameToGreet,
         });
     });
-
-function getInputOrDefault(
-    name: string,
-    default_value = "",
-    trimWhitespace = false,
-    required = false
-): string {
-    const input = core.getInput(name, {
-        trimWhitespace,
-        required,
-    });
-    if (!input || input === "") return default_value;
-    return input;
-}
