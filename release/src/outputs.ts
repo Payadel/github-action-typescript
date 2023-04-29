@@ -4,6 +4,6 @@ export interface IOutputs {
     helloMessage: string;
 }
 
-export function setOutputs(data: IOutputs): void{
+export function setOutputs(data: IOutputs): void {
     core.setOutput("hello-message", data.helloMessage);
 }

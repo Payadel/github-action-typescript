@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import { getInputs } from "./inputs";
-import {setOutputs} from "./outputs";
+import { setOutputs } from "./outputs";
 // import * as github from "@actions/github";
 // import * as exec from "@actions/exec";
 
@@ -12,7 +12,7 @@ const run = (): Promise<void> =>
             const helloMessage = `Hello ${inputs.nameToGreet}!`;
             core.info(helloMessage);
 
-            setOutputs({helloMessage})
+            setOutputs({ helloMessage });
 
             // Get the JSON webhook payload for the event that triggered the workflow
             // const payload = JSON.stringify(github.context.payload, undefined, 2);

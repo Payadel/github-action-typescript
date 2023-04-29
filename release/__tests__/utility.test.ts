@@ -1,6 +1,11 @@
 import * as core from "@actions/core";
-import {mockGetInput} from "./inputs.test";
-import {execBashCommand, execCommand, getBooleanInputOrDefault, getInputOrDefault} from "../src/utility";
+import { mockGetInput } from "./inputs.test";
+import {
+    execBashCommand,
+    execCommand,
+    getBooleanInputOrDefault,
+    getInputOrDefault,
+} from "../src/utility";
 import * as exec from "@actions/exec";
 
 jest.mock("@actions/core");
@@ -33,7 +38,11 @@ describe("getInputOrDefault", () => {
     it("should return input data", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: 'test', value: "test-value"}], options)
+                mockGetInput(
+                    name,
+                    [{ key: "test", value: "test-value" }],
+                    options
+                )
         );
 
         const input = getInputOrDefault("test", "default");
@@ -44,7 +53,7 @@ describe("getInputOrDefault", () => {
     it("should return default value", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: 'test', value: ""}], options)
+                mockGetInput(name, [{ key: "test", value: "" }], options)
         );
 
         const input = getInputOrDefault("test", "default");
@@ -57,7 +66,7 @@ describe("getBooleanInputOrDefault", () => {
     it("should return default value", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: 'test', value: ""}], options)
+                mockGetInput(name, [{ key: "test", value: "" }], options)
         );
 
         const input = getBooleanInputOrDefault("test", true);
@@ -68,7 +77,14 @@ describe("getBooleanInputOrDefault", () => {
     it("should return true", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: 'test1', value: "true"}, {key: 'test2', value: "TruE"}], options)
+                mockGetInput(
+                    name,
+                    [
+                        { key: "test1", value: "true" },
+                        { key: "test2", value: "TruE" },
+                    ],
+                    options
+                )
         );
 
         let input = getBooleanInputOrDefault("test1", false);
@@ -76,13 +92,19 @@ describe("getBooleanInputOrDefault", () => {
 
         input = getBooleanInputOrDefault("test2", false);
         expect(input).toBe(true);
-
     });
 
     it("should return false", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: 'test1', value: "false"}, {key: 'test2', value: "fALsE"}], options)
+                mockGetInput(
+                    name,
+                    [
+                        { key: "test1", value: "false" },
+                        { key: "test2", value: "fALsE" },
+                    ],
+                    options
+                )
         );
 
         let input = getBooleanInputOrDefault("test1", true);
@@ -93,33 +115,40 @@ describe("getBooleanInputOrDefault", () => {
     });
 });
 
-describe('execBashCommand', () => {
-    it('should execute a bash command and return the output', async () => {
+describe("execBashCommand", () => {
+    it("should execute a bash command and return the output", async () => {
         let result = await execBashCommand("echo 'Hello World' && exit 0");
-        expect(result.stdout).toEqual('Hello World\n');
-        expect(result.stderr).toEqual('');
+        expect(result.stdout).toEqual("Hello World\n");
+        expect(result.stderr).toEqual("");
         expect(result.exitCode).toEqual(0);
 
         result = await execBashCommand('echo "Hello World" && exit 0');
-        expect(result.stdout).toEqual('Hello World\n');
-        expect(result.stderr).toEqual('');
+        expect(result.stdout).toEqual("Hello World\n");
+        expect(result.stderr).toEqual("");
         expect(result.exitCode).toEqual(0);
     });
 
-    it('give invalid command. throw error with exit code', async () => {
-        await expect(execBashCommand('non_existent_command')).rejects
-            .toThrow("Execute '/bin/bash -c \"non_existent_command\"' failed.\nThe process '/bin/bash' failed with exit code 127");
+    it("give invalid command. throw error with exit code", async () => {
+        await expect(execBashCommand("non_existent_command")).rejects.toThrow(
+            "Execute '/bin/bash -c \"non_existent_command\"' failed.\nThe process '/bin/bash' failed with exit code 127"
+        );
     });
 
-    it('exit with non zero code, should throw error with exit code', async () => {
-        await expect(execBashCommand("echo 'hello world' && exit 1")).rejects
-            .toThrow("Execute '/bin/bash -c \"echo 'hello world' && exit 1\"' failed.\nThe process '/bin/bash' failed with exit code 1");
+    it("exit with non zero code, should throw error with exit code", async () => {
+        await expect(
+            execBashCommand("echo 'hello world' && exit 1")
+        ).rejects.toThrow(
+            "Execute '/bin/bash -c \"echo 'hello world' && exit 1\"' failed.\nThe process '/bin/bash' failed with exit code 1"
+        );
     });
 
-    it('give custom message, should throw error with exit code and custom message', async () => {
+    it("give custom message, should throw error with exit code and custom message", async () => {
         const customMessage = "This is a custom message.";
-        await expect(execBashCommand("echo 'hello world' && exit 1", customMessage)).rejects
-            .toThrow(`${customMessage}\nThe process '/bin/bash' failed with exit code 1`);
+        await expect(
+            execBashCommand("echo 'hello world' && exit 1", customMessage)
+        ).rejects.toThrow(
+            `${customMessage}\nThe process '/bin/bash' failed with exit code 1`
+        );
     });
 });
 
