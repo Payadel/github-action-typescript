@@ -1,4 +1,5 @@
-import * as core from "@actions/core";
+import { getInputOrDefault } from "./utility";
+import { DEFAULT_INPUTS } from "./configs";
 
 export interface IInputs {
     nameToGreet: string;
@@ -6,7 +7,12 @@ export interface IInputs {
 
 export const getInputs = (): Promise<IInputs> =>
     new Promise<IInputs>(resolve => {
-        const nameToGreet = getInputOrDefault("who-to-great", "", true, true);
+        const nameToGreet = getInputOrDefault(
+            "who-to-great",
+            DEFAULT_INPUTS.nameToGreet,
+            true,
+            true
+        );
         if (!nameToGreet)
             throw new Error("The name-to-great param is required.");
 
@@ -14,17 +20,3 @@ export const getInputs = (): Promise<IInputs> =>
             nameToGreet,
         });
     });
-
-function getInputOrDefault(
-    name: string,
-    default_value = "",
-    trimWhitespace = false,
-    required = false
-): string {
-    const input = core.getInput(name, {
-        trimWhitespace,
-        required,
-    });
-    if (!input || input === "") return default_value;
-    return input;
-}

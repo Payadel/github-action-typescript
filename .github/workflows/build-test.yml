@@ -1,8 +1,6 @@
 name: 'build-test'
 on: # rebuild any PRs and main branch changes
   push:
-    branches:
-      - dev
   pull_request:
     branches:
       - main
@@ -17,6 +15,5 @@ jobs:
       - name: Run All
         run: |
           cd release
-          npm install
           export NODE_OPTIONS=--openssl-legacy-provider
           npm run all

@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/Payadel/github-action-typescript/compare/v0.2.5...v0.2.6) (2023-04-29)
+
+
+### Features
+
+* add `execCommand` and `execBashCommand` ([2c43dfd](https://github.com/Payadel/github-action-typescript/commit/2c43dfd3e56e2100bd7149e7061dcda9572c37cf))
+* add `mockGetExecOutput` ([dc0197b](https://github.com/Payadel/github-action-typescript/commit/dc0197b628ea030231c015ffb470e0c673344f90))
+* add configs.ts and `DEFAULT_INPUTS` in it ([eb10719](https://github.com/Payadel/github-action-typescript/commit/eb1071914eda96245b6fb1d7563b0d1fdd88c435))
+* add tests for utility.ts ([3860029](https://github.com/Payadel/github-action-typescript/commit/3860029fcea8a27590ad6a4e4709f084b3c7f8dd))
+
+
+### Refactors
+
+* reformat ([f08b9fd](https://github.com/Payadel/github-action-typescript/commit/f08b9fd5f966a93c0772e1598332b3185e2496dc))
+
+
+### Fixes
+
+* create utility.ts ([945f5f1](https://github.com/Payadel/github-action-typescript/commit/945f5f1b3b800664a06a287a93605b9161986bf2))
+* fix deps conflict in package.json ([f144bcd](https://github.com/Payadel/github-action-typescript/commit/f144bcd068bac3332153700249443ffd3f0ba5ef))
+* update action events ([4b4e377](https://github.com/Payadel/github-action-typescript/commit/4b4e377bb8106a8c90bb7d8213fba2eff3b7d9cd))
+
+
+### Development: CI/CD, Build, etc
+
+* update build-test.yml ([48d4e7d](https://github.com/Payadel/github-action-typescript/commit/48d4e7d9be2a44c20db8d81d6025753849bd5feb))
+* update payadel/changelog-sv-action ([8897b8f](https://github.com/Payadel/github-action-typescript/commit/8897b8fd292cd52e40f30739ac4f37f2c25a0e7f))
+
 ### [0.2.5](https://github.com/Payadel/github-action-typescript/compare/v0.2.4...v0.2.5) (2023-04-27)
 
 
