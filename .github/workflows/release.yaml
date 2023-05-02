@@ -6,10 +6,13 @@ on:
       version:
         required: false
         default: ''
-      skip_changelog:
-        type: boolean
-        default: true
-        description: Skip generate changelog
+      generate-changelog:
+        type: choice
+        default: auto
+        options:
+          - never
+          - always
+          - auto
       create_pr_for_branch:
         required: false
         default: 'main'
@@ -35,7 +38,7 @@ jobs:
 
       - name: Print inputs
         run: |
-          echo "skip_changelog: ${{ inputs.skip_changelog }}"
+          echo "generate-changelog: ${{ inputs.generate-changelog }}"
           echo "version: ${{ inputs.version }}"
           echo "create_pr_for_branch: ${{ inputs.create_pr_for_branch }}"
           echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
@@ -45,18 +48,24 @@ jobs:
         id: release
         with:
           version: ${{ inputs.version }}
-          skip-changelog: ${{ inputs.skip_changelog }}
+          generate-changelog: ${{ inputs.generate-changelog }}
+          create-pr-for-branch: ${{ inputs.create_pr_for_branch }}
           skip-release-file: false
           release-directory: 'release'
           release-file-name: 'release'
-          create-pr-for-branch: ${{ inputs.create_pr_for_branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print outputs
+        run: |
+          echo "version: ${{ steps.release.outputs.version }}"
+          echo "pull-request-url: ${{ steps.release.outputs.pull-request-url }}"
+          echo "release-filename: ${{ steps.release.outputs.release-filename }}"
 
       - name: GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: '${{ steps.release.outputs.releaseFileName }}'
+          artifacts: '${{ steps.release.outputs.release-filename }}'
           allowUpdates: true
-          bodyFile: "CHANGELOG.md"
+          body: ${{ steps.release.outputs.changelog }}
           tag: 'v${{ steps.release.outputs.version }}'
