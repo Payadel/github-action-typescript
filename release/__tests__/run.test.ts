@@ -1,10 +1,14 @@
 import run from "../src/run";
 import * as core from "@actions/core";
-import { mockGetInput } from "./inputs.test";
+import { mockGetInput } from "./mocks.utility";
 
 jest.mock("@actions/core");
 
 describe("run", () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it("must output a hello message with the correct name and set it as an output", async () => {
         // Arrange
         const expectedName = "Payadel";
@@ -15,11 +19,7 @@ describe("run", () => {
         const setFailedMock = jest.spyOn(core, "setFailed");
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    [{ key: "who-to-great", value: expectedName }],
-                    options
-                )
+                mockGetInput(name, { "who-to-great": expectedName }, options)
         );
 
         // Act
@@ -46,11 +46,7 @@ describe("run", () => {
         const setFailedMock = jest.spyOn(core, "setFailed");
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    [{ key: "who-to-great", value: "" }],
-                    options
-                )
+                mockGetInput(name, { "who-to-great": "" }, options)
         );
 
         // Act

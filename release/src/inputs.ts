@@ -6,17 +6,18 @@ export interface IInputs {
 }
 
 export const getInputs = (): Promise<IInputs> =>
-    new Promise<IInputs>(resolve => {
-        const nameToGreet = getInputOrDefault(
-            "who-to-great",
-            DEFAULT_INPUTS.nameToGreet,
-            true,
-            true
-        );
-        if (!nameToGreet)
-            throw new Error("The name-to-great param is required.");
+    new Promise<IInputs>(resolve =>
+        resolve({
+            nameToGreet:
+                getInputOrDefault("who-to-great", undefined, true, true) ??
+                DEFAULT_INPUTS.nameToGreet,
+        })
+    );
 
-        return resolve({
-            nameToGreet,
-        });
+export function ensureInputsValid(inputs: IInputs): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        return inputs.nameToGreet
+            ? resolve()
+            : reject(new Error("The 'who-to-great' parameter is required."));
     });
+}
