@@ -44,7 +44,7 @@ jobs:
           echo "Current Branch: $(git rev-parse --abbrev-ref HEAD)"
 
       - name: Release
-        uses: Payadel/release-sv-action@v0.3.0
+        uses: Payadel/release-sv-action@v0.3.1
         id: release
         with:
           version: ${{ inputs.version }}
