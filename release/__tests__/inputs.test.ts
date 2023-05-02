@@ -1,31 +1,21 @@
 import * as core from "@actions/core";
-import { getInputs, IInputs } from "../src/inputs";
+import {getInputs, IInputs} from "../src/inputs";
+import {mockGetInput} from "./mocks.utility";
 
 jest.mock("@actions/core");
 
-export function mockGetInput(
-    name: string,
-    inputs: { key: string; value: string }[],
-    options?: core.InputOptions | undefined
-): string {
-    name = name.toLowerCase();
-    const target = inputs.find(input => input.key.toLowerCase() === name);
-    let result = target ? target.value : "";
-
-    if (options && options.required && !result)
-        throw new Error(`Input required and not supplied: ${name}`);
-    if (options && options.trimWhitespace) result = result.trim();
-    return result;
-}
-
 describe("getInputs", () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it("should return the input nameToGreet from the action", async () => {
         const inputNameToGreet = "Payadel";
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    [{ key: "who-to-great", value: inputNameToGreet }],
+                    {"who-to-great": inputNameToGreet},
                     options
                 )
         );
@@ -41,7 +31,7 @@ describe("getInputs", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    [{ key: "who-to-great", value: "" }],
+                    {"who-to-great": ''},
                     options
                 )
         );
@@ -53,7 +43,7 @@ describe("getInputs", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    [{ key: "who-to-great", value: "   " }],
+                    {"who-to-great": '    '},
                     options
                 )
         );
@@ -68,12 +58,7 @@ describe("getInputs", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    [
-                        {
-                            key: "who-to-great",
-                            value: `    ${inputNameToGreet}    `,
-                        },
-                    ],
+                    {"who-to-great": `    ${inputNameToGreet}    `},
                     options
                 )
         );

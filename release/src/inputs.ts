@@ -1,22 +1,22 @@
-import { getInputOrDefault } from "./utility";
-import { DEFAULT_INPUTS } from "./configs";
+import {getInputOrDefault} from "./utility";
+import {DEFAULT_INPUTS} from "./configs";
 
 export interface IInputs {
     nameToGreet: string;
 }
 
 export const getInputs = (): Promise<IInputs> =>
-    new Promise<IInputs>(resolve => {
-        const nameToGreet = getInputOrDefault(
+    new Promise<IInputs>(resolve => resolve({
+        nameToGreet: getInputOrDefault(
             "who-to-great",
-            DEFAULT_INPUTS.nameToGreet,
+            undefined,
             true,
             true
-        );
-        if (!nameToGreet)
-            throw new Error("The name-to-great param is required.");
+        ) ?? DEFAULT_INPUTS.nameToGreet,
+    }));
 
-        return resolve({
-            nameToGreet,
-        });
+export function ensureInputsValid(inputs: IInputs): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        return inputs.nameToGreet ? resolve() : reject(`The 'who-to-great' parameter is required.`)
     });
+}
