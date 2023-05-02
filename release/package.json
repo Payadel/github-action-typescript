@@ -5,14 +5,18 @@
   "main": "lib/main.js",
   "scripts": {
     "ins": "npm install",
-    "build": "tsc",
+    "build": "rm -r lib; tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "rm -r dist; ncc build --source-map --license licenses.txt",
     "test": "jest --passWithNoTests",
     "coverage": "jest --coverage",
-    "all": "npm run ins && npm run build && npm run format && npm run lint && npm run package && npm test"
+    "all": "npm run ins && npm run build && npm run format && npm run lint && npm run package && npm test",
+    "actions:watch": "gh run watch && notify-send \"run is done!\"",
+    "actions:changelog": "gh workflow run Changelog --ref dev -f version=''",
+    "actions:release": "gh workflow run Release --ref dev -f version=''",
+    "version": "node -p -e \"require('./package.json').version\""
   },
   "repository": {
     "type": "git",
