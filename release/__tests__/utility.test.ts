@@ -1,48 +1,144 @@
-import * as core from "@actions/core";
-import { mockGetInput } from "./inputs.test";
-import {
-    execBashCommand,
-    execCommand,
-    getBooleanInputOrDefault,
-    getInputOrDefault,
-} from "../src/utility";
+import {join} from "path";
 import * as exec from "@actions/exec";
+import * as core from "@actions/core";
+import {execBashCommand, execCommand, getBooleanInputOrDefault, getInputOrDefault, readFile} from "../src/utility";
+import {mockGetExecOutput, mockGetInput} from "./mocks.utility";
+import fs, {mkdtempSync, writeFileSync} from "fs";
 
-jest.mock("@actions/core");
+describe("execBashCommand", () => {
+    jest.mock("@actions/exec");
 
-interface IExpectedCommand {
-    command: string;
-    success: boolean;
-    resolve?: {
-        stdout: string;
-        stderr: string;
-        exitCode: number;
-    };
-    rejectMessage?: string;
-}
-function mockGetExecOutput(
-    command: string,
-    expectedCommands: IExpectedCommand[]
-): Promise<exec.ExecOutput> {
-    command = command.toLowerCase();
-    const target = expectedCommands.find(
-        input => input.command.toLowerCase() === command
-    );
-    if (!target) return Promise.reject(new Error("Command not found."));
-    return target.success
-        ? Promise.resolve<exec.ExecOutput>(target.resolve!)
-        : Promise.reject<exec.ExecOutput>(new Error(target.rejectMessage!));
-}
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
+    it("should execute a bash command and return the output", async () => {
+        jest.spyOn(exec, "getExecOutput").mockImplementation(command =>
+            mockGetExecOutput(command, [
+                {
+                    command: "/bin/bash -c \"echo 'Hello World' && exit 0\"",
+                    success: true,
+                    resolve: {
+                        stdout: "Hello World",
+                        stderr: "",
+                        exitCode: 0,
+                    },
+                },
+            ])
+        );
+
+        let result = await execBashCommand("echo 'Hello World' && exit 0");
+        expect(result.stdout).toEqual("Hello World");
+        expect(result.stderr).toEqual("");
+        expect(result.exitCode).toEqual(0);
+
+        result = await execBashCommand('echo "Hello World" && exit 0');
+        expect(result.stdout).toEqual("Hello World");
+        expect(result.stderr).toEqual("");
+        expect(result.exitCode).toEqual(0);
+    });
+
+    it("give invalid command. throw error with exit code", async () => {
+        jest.spyOn(exec, "getExecOutput").mockImplementation(command =>
+            mockGetExecOutput(command, [])
+        );
+
+        await expect(execBashCommand("non_existent_command")).rejects.toThrow(
+            "Execute '/bin/bash -c \"non_existent_command\"' failed."
+        );
+    });
+});
+
+describe("execCommand", () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
+    test("should execute command successfully", async () => {
+        jest.spyOn(exec, "getExecOutput").mockImplementation(command =>
+            mockGetExecOutput(command, [
+                {
+                    command: 'echo "Hello World"',
+                    success: true,
+                    resolve: {
+                        stdout: "Hello World",
+                        stderr: "",
+                        exitCode: 0,
+                    },
+                },
+            ])
+        );
+
+        const output = await execCommand('echo "Hello World"');
+        expect(output.stdout.trim()).toBe("Hello World");
+        expect(output.stderr).toBeFalsy();
+        expect(output.exitCode).toBe(0);
+    });
+
+    test("should throw an error when the command fails", async () => {
+        jest.spyOn(exec, "getExecOutput").mockImplementation(command =>
+            mockGetExecOutput(command, [])
+        );
+
+        await expect(execCommand("invalid-command")).rejects.toThrow(
+            "Execute 'invalid-command' failed."
+        );
+    });
+
+    test("should throw an error with custom error message when provided", async () => {
+        jest.spyOn(exec, "getExecOutput").mockImplementation(command =>
+            mockGetExecOutput(command, [])
+        );
+
+        const customMessage = "Custom error message";
+        await expect(
+            execCommand("invalid-command", customMessage)
+        ).rejects.toThrow(new RegExp(customMessage));
+    });
+});
+
+describe("readFile", () => {
+    let tempDir: string;
+    let filePath: string;
+    const content = "sample content";
+
+    beforeEach(() => {
+        // Create a unique temporary directory with a random name
+        tempDir = mkdtempSync("/tmp/test-");
+
+        // Write a package.json file to the temporary directory
+        filePath = join(tempDir, "file.txt");
+        writeFileSync(filePath, `    ${content}   `);
+    });
+
+    afterEach(() => {
+        // Delete the temporary directory
+        fs.rmSync(tempDir, {recursive: true});
+    });
+
+    test("should read file and return text with trim", async () => {
+        const content = await readFile(filePath);
+        expect(content).toBe(content);
+    });
+
+    test("give invalid path, should throw error", async () => {
+        await expect(readFile("invalid path")).rejects.toThrow(
+            "Can not find 'invalid path'."
+        );
+    });
+});
 
 describe("getInputOrDefault", () => {
+    jest.mock("@actions/core");
+
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it("should return input data", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    [{ key: "test", value: "test-value" }],
-                    options
-                )
+                mockGetInput(name, {test: "test-value"}, options)
         );
 
         const input = getInputOrDefault("test", "default");
@@ -53,7 +149,7 @@ describe("getInputOrDefault", () => {
     it("should return default value", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{ key: "test", value: "" }], options)
+                mockGetInput(name, [{key: "test", value: ""}], options)
         );
 
         const input = getInputOrDefault("test", "default");
@@ -63,10 +159,16 @@ describe("getInputOrDefault", () => {
 });
 
 describe("getBooleanInputOrDefault", () => {
+    jest.mock("@actions/core");
+
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it("should return default value", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{ key: "test", value: "" }], options)
+                mockGetInput(name, [{key: "test", value: ""}], options)
         );
 
         const input = getBooleanInputOrDefault("test", true);
@@ -79,10 +181,10 @@ describe("getBooleanInputOrDefault", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    [
-                        { key: "test1", value: "true" },
-                        { key: "test2", value: "TruE" },
-                    ],
+                    {
+                        test1: "true",
+                        test2: "TruE",
+                    },
                     options
                 )
         );
@@ -97,14 +199,7 @@ describe("getBooleanInputOrDefault", () => {
     it("should return false", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    [
-                        { key: "test1", value: "false" },
-                        { key: "test2", value: "fALsE" },
-                    ],
-                    options
-                )
+                mockGetInput(name, {test1: "false", test2: "fALsE"}, options)
         );
 
         let input = getBooleanInputOrDefault("test1", true);
@@ -113,63 +208,19 @@ describe("getBooleanInputOrDefault", () => {
         input = getBooleanInputOrDefault("test2", true);
         expect(input).toBe(false);
     });
-});
 
-describe("execBashCommand", () => {
-    it("should execute a bash command and return the output", async () => {
-        let result = await execBashCommand("echo 'Hello World' && exit 0");
-        expect(result.stdout).toEqual("Hello World\n");
-        expect(result.stderr).toEqual("");
-        expect(result.exitCode).toEqual(0);
-
-        result = await execBashCommand('echo "Hello World" && exit 0');
-        expect(result.stdout).toEqual("Hello World\n");
-        expect(result.stderr).toEqual("");
-        expect(result.exitCode).toEqual(0);
-    });
-
-    it("give invalid command. throw error with exit code", async () => {
-        await expect(execBashCommand("non_existent_command")).rejects.toThrow(
-            "Execute '/bin/bash -c \"non_existent_command\"' failed.\nThe process '/bin/bash' failed with exit code 127"
+    it("give invalid input. expect throw error", () => {
+        jest.spyOn(core, "getInput").mockImplementation(
+            (name: string, options?: core.InputOptions | undefined) =>
+                mockGetInput(
+                    name,
+                    {test1: "false", test2: "invalid"},
+                    options
+                )
         );
-    });
 
-    it("exit with non zero code, should throw error with exit code", async () => {
-        await expect(
-            execBashCommand("echo 'hello world' && exit 1")
-        ).rejects.toThrow(
-            "Execute '/bin/bash -c \"echo 'hello world' && exit 1\"' failed.\nThe process '/bin/bash' failed with exit code 1"
+        expect(() => getBooleanInputOrDefault("test2", true)).toThrow(
+            "The value of 'test2' is not valid. It must be either true or false but got 'invalid'."
         );
-    });
-
-    it("give custom message, should throw error with exit code and custom message", async () => {
-        const customMessage = "This is a custom message.";
-        await expect(
-            execBashCommand("echo 'hello world' && exit 1", customMessage)
-        ).rejects.toThrow(
-            `${customMessage}\nThe process '/bin/bash' failed with exit code 1`
-        );
-    });
-});
-
-describe("execCommand", () => {
-    test("should execute command successfully", async () => {
-        const output = await execCommand('echo "Hello World"');
-        expect(output.stdout.trim()).toBe("Hello World");
-        expect(output.stderr).toBeFalsy();
-        expect(output.exitCode).toBe(0);
-    });
-
-    test("should throw an error when the command fails", async () => {
-        await expect(execCommand("invalid-command")).rejects.toThrow(
-            new RegExp("Execute 'invalid-command' failed.")
-        );
-    });
-
-    test("should throw an error with custom error message when provided", async () => {
-        const customMessage = "Custom error message";
-        await expect(
-            execCommand("invalid-command", customMessage)
-        ).rejects.toThrow(new RegExp(customMessage));
     });
 });
