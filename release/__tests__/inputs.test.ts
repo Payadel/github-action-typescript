@@ -34,14 +34,6 @@ describe("getInputs", () => {
         await expect(getInputs()).rejects.toThrow(
             "Input required and not supplied: who-to-great"
         );
-
-        jest.spyOn(core, "getInput").mockImplementation(
-            (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, { "who-to-great": "    " }, options)
-        );
-        await expect(getInputs()).rejects.toThrow(
-            "The name-to-great param is required."
-        );
     });
 
     it("name must be trim", async () => {

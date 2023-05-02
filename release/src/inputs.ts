@@ -18,6 +18,6 @@ export function ensureInputsValid(inputs: IInputs): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         return inputs.nameToGreet
             ? resolve()
-            : reject(`The 'who-to-great' parameter is required.`);
+            : reject(new Error("The 'who-to-great' parameter is required."));
     });
 }

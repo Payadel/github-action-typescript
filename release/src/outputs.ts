@@ -5,5 +5,5 @@ export interface IActionOutputs {
 }
 
 export function setOutputs(data: IActionOutputs): void {
-    for (let key of Object.keys(data)) core.setOutput(key, data[key]);
+    for (const key of Object.keys(data)) core.setOutput(key, data[key]);
 }
