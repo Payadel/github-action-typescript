@@ -1,6 +1,6 @@
 import run from "../src/run";
 import * as core from "@actions/core";
-import {mockGetInput} from "./mocks.utility";
+import { mockGetInput } from "./mocks.utility";
 
 jest.mock("@actions/core");
 
@@ -19,11 +19,7 @@ describe("run", () => {
         const setFailedMock = jest.spyOn(core, "setFailed");
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    {"who-to-great": expectedName},
-                    options
-                )
+                mockGetInput(name, { "who-to-great": expectedName }, options)
         );
 
         // Act
@@ -50,11 +46,7 @@ describe("run", () => {
         const setFailedMock = jest.spyOn(core, "setFailed");
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    {"who-to-great": ""},
-                    options
-                )
+                mockGetInput(name, { "who-to-great": "" }, options)
         );
 
         // Act

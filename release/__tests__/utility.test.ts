@@ -1,9 +1,15 @@
-import {join} from "path";
+import { join } from "path";
 import * as exec from "@actions/exec";
 import * as core from "@actions/core";
-import {execBashCommand, execCommand, getBooleanInputOrDefault, getInputOrDefault, readFile} from "../src/utility";
-import {mockGetExecOutput, mockGetInput} from "./mocks.utility";
-import fs, {mkdtempSync, writeFileSync} from "fs";
+import {
+    execBashCommand,
+    execCommand,
+    getBooleanInputOrDefault,
+    getInputOrDefault,
+    readFile,
+} from "../src/utility";
+import { mockGetExecOutput, mockGetInput } from "./mocks.utility";
+import fs, { mkdtempSync, writeFileSync } from "fs";
 
 describe("execBashCommand", () => {
     jest.mock("@actions/exec");
@@ -113,7 +119,7 @@ describe("readFile", () => {
 
     afterEach(() => {
         // Delete the temporary directory
-        fs.rmSync(tempDir, {recursive: true});
+        fs.rmSync(tempDir, { recursive: true });
     });
 
     test("should read file and return text with trim", async () => {
@@ -138,7 +144,7 @@ describe("getInputOrDefault", () => {
     it("should return input data", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, {test: "test-value"}, options)
+                mockGetInput(name, { test: "test-value" }, options)
         );
 
         const input = getInputOrDefault("test", "default");
@@ -149,7 +155,7 @@ describe("getInputOrDefault", () => {
     it("should return default value", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: "test", value: ""}], options)
+                mockGetInput(name, [{ key: "test", value: "" }], options)
         );
 
         const input = getInputOrDefault("test", "default");
@@ -168,7 +174,7 @@ describe("getBooleanInputOrDefault", () => {
     it("should return default value", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, [{key: "test", value: ""}], options)
+                mockGetInput(name, [{ key: "test", value: "" }], options)
         );
 
         const input = getBooleanInputOrDefault("test", true);
@@ -199,7 +205,7 @@ describe("getBooleanInputOrDefault", () => {
     it("should return false", () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(name, {test1: "false", test2: "fALsE"}, options)
+                mockGetInput(name, { test1: "false", test2: "fALsE" }, options)
         );
 
         let input = getBooleanInputOrDefault("test1", true);
@@ -214,7 +220,7 @@ describe("getBooleanInputOrDefault", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    {test1: "false", test2: "invalid"},
+                    { test1: "false", test2: "invalid" },
                     options
                 )
         );

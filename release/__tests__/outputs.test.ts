@@ -10,7 +10,7 @@ describe("setOutputs", () => {
 
     it("should set all outputs", () => {
         const data: IActionOutputs = {
-            "hello-message": "hello"
+            "hello-message": "hello",
         };
 
         jest.spyOn(core, "setOutput");

@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
-import {getInputs, IInputs} from "../src/inputs";
-import {mockGetInput} from "./mocks.utility";
+import { getInputs, IInputs } from "../src/inputs";
+import { mockGetInput } from "./mocks.utility";
 
 jest.mock("@actions/core");
 
@@ -15,7 +15,7 @@ describe("getInputs", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    {"who-to-great": inputNameToGreet},
+                    { "who-to-great": inputNameToGreet },
                     options
                 )
         );
@@ -29,11 +29,7 @@ describe("getInputs", () => {
     it("give invalid input, should reject promise", async () => {
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    {"who-to-great": ''},
-                    options
-                )
+                mockGetInput(name, { "who-to-great": "" }, options)
         );
         await expect(getInputs()).rejects.toThrow(
             "Input required and not supplied: who-to-great"
@@ -41,11 +37,7 @@ describe("getInputs", () => {
 
         jest.spyOn(core, "getInput").mockImplementation(
             (name: string, options?: core.InputOptions | undefined) =>
-                mockGetInput(
-                    name,
-                    {"who-to-great": '    '},
-                    options
-                )
+                mockGetInput(name, { "who-to-great": "    " }, options)
         );
         await expect(getInputs()).rejects.toThrow(
             "The name-to-great param is required."
@@ -58,7 +50,7 @@ describe("getInputs", () => {
             (name: string, options?: core.InputOptions | undefined) =>
                 mockGetInput(
                     name,
-                    {"who-to-great": `    ${inputNameToGreet}    `},
+                    { "who-to-great": `    ${inputNameToGreet}    ` },
                     options
                 )
         );
