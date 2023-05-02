@@ -2,21 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.2.9](https://github.com/Payadel/github-action-typescript/compare/v0.2.8...v0.2.9) (2023-05-02)
-
-### [0.2.8](https://github.com/Payadel/github-action-typescript/compare/v0.2.7...v0.2.8) (2023-05-02)
-
-
-### Fixes
-
-* minor updates ([d2b7547](https://github.com/Payadel/github-action-typescript/commit/d2b754773223bd908b4bddd8b4671c2ad62d2c08))
-
-
-### Development: CI/CD, Build, etc
-
-* fix `Payadel/release-sv-action` version ([a05cd11](https://github.com/Payadel/github-action-typescript/commit/a05cd11182d4a36541ab2a4de443729f5378784f))
-* remove excess actions ([aaa92ac](https://github.com/Payadel/github-action-typescript/commit/aaa92ac2ab26ae2e39937b29e499ed6136049292))
-* update build-test.yml ([4fc5155](https://github.com/Payadel/github-action-typescript/commit/4fc51557dfe6af784ae699e2709ef7c286cc6885))
 
 ### [0.2.6](https://github.com/Payadel/github-action-typescript/compare/v0.2.5...v0.2.6) (2023-04-29)
 
