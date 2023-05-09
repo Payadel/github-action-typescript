@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.9](https://github.com/Payadel/github-action-typescript/compare/v0.2.8...v0.2.9) (2023-05-09)
+
+
+### Fixes
+
+* minor fix in `utility.test.ts` ([b037940](https://github.com/Payadel/github-action-typescript/commit/b037940caac665ed244ad0a44bae071eb6870a99))
+* update `Payadel/assert` version ([4031b43](https://github.com/Payadel/github-action-typescript/commit/4031b43ba8f7687723f4271120cff609def369e2))
+
+
+### Development: CI/CD, Build, etc
+
+* **deps-dev:** bump @types/node from 18.16.6 to 20.1.1 in /release ([46e588f](https://github.com/Payadel/github-action-typescript/commit/46e588fd2e9b67904174442bae0a710883b49c8a))
+* **deps:** bump payadel/changelog-sv-action from 0.0.4 to 0.0.5 ([2a0fe44](https://github.com/Payadel/github-action-typescript/commit/2a0fe447c2bbd69b866584a4d00d83f47747a206))
+* use `payadel/inputs` in actions ([1a287ac](https://github.com/Payadel/github-action-typescript/commit/1a287ac641e482dab582a877f4c5818edc22d9d5))
+
 ### [0.2.8](https://github.com/Payadel/github-action-typescript/compare/v0.2.7...v0.2.8) (2023-05-02)
 
 
