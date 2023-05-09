@@ -41,7 +41,7 @@ jobs:
 
       # For more information and sample asserts, please see https://github.com/Payadel/assert/
       - name: Test outputs
-        uses: Payadel/assert@v1.0.0
+        uses: Payadel/assert@v1.0.1
         with:
           fail-fast: false
           verbose: true

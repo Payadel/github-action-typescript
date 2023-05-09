@@ -56,6 +56,8 @@ describe("execBashCommand", () => {
 });
 
 describe("execCommand", () => {
+    jest.mock("@actions/exec");
+
     beforeEach(() => {
         jest.resetAllMocks();
     });
