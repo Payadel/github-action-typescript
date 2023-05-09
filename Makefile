@@ -4,7 +4,7 @@
 REF := $(if $(ref),$(ref),"dev")
 VERSION := $(if $(version),$(version),"")
 GENERATE_CHANGELOG := $(if $(generate-changelog),$(generate-changelog),'auto')
-CREATE_PR_FOR_BRANCH := $(if $(create_pr_for_branch),$(create_pr_for_branch),"")
+CREATE_PR_FOR_BRANCH := $(if $(create_pr_for_branch),$(create_pr_for_branch),"main")
 
 # Targets for running workflow commands
 watch-actions: ## Watch a run until it completes, showing its progress
